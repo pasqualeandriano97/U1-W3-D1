@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="it">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      body div,
+      footer {
+        padding: 1rem;
+      }
+
+      footer {
+        padding: 1rem;
+        background-color: black;
+        color: white;
+      }
+
+      .myHeading {
+        color: #ff00d6;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <h1>Questo è il titolo della pagina</h1>
+      <h2>Questo è il sottotitolo della pagina</h2>
+    </div>
+
+    <div>
+      <hr />
+
+      <ul id="firstList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <ul id="secondList">
+        <li>1st</li>
+        <li>2nd</li>
+        <li>3rd</li>
+      </ul>
+
+      <a href="https://epicode.com/it/">Questo link porta al sito di Epicode</a>
+
+      <div>
+        <p>Questo testo è un placeholder per gli esercizi</p>
+      </div>
+    </div>
+
+    <div>
+      <p>Anche questo testo è per gli esercizi</p>
+      <h2 id="changeMyColor" style="color: #ff00d6">
+        Apri questa pagina con VSCode per scoprire gli esercizi
+      </h2>
+    </div>
+
+    <div id="tableArea"></div>
+
+    <footer>
+      <h3>
+        DOM Manipulation is super
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents"
+          >AWESOME!</a
+        >
+      </h3>
+    </footer>
+    <script>
+      /* ESERCIZIO 1
+         Scrivi una funzione per cambiare il titolo della pagina in qualcos'altro
+      */
+
+      const changeTitle = function () {
+        const titleOfThePage = document.getElementsByTagName("h1")[0];
+        titleOfThePage.innerText = "Epicode";
+      };
+      changeTitle();
+      /* ESERCIZIO 2
+         Scrivi una funzione per aggiungere al titolo della pagina una classe "myHeading"
+      */
+
+      const addClassToTitle = function () {
+        const titleClass = document.getElementsByTagName("h1")[0];
+        titleClass.classList.add("Title");
+      };
+      addClassToTitle();
+
+      /* ESERCIZIO 3
+         Scrivi una funzione che cambi il testo dei p figli di un div
+        */
+
+      const changePcontent = function () {
+        const sonsOfDiv = document.querySelector("div p");
+        sonsOfDiv.innerText =
+          "Questo è il testo inserito nella funzione 'changePcontnent'";
+      };
+      changePcontent();
+
+      /* ESERCIZIO 4
+         Scrivi una funzione che cambi la proprietà href di ogni link (tranne quello nel footer) con il valore https://www.google.com
+        */
+
+      const changeUrls = function () {
+        const firstLink = document.querySelector("a");
+        firstLink.setAttribute("href", "https://www.google.com");
+      };
+      changeUrls();
+
+      /* ESERCIZIO 5
+         Scrivi una funzione che aggiunga un nuovo elemento lista alla seconda lista non ordinata
+      */
+
+      const addToTheSecond = function () {
+        const secondList = document.getElementById("secondList");
+        const anotherListItem = document.createElement("li");
+        anotherListItem.innerText = "Nuovo elemento della lista";
+        secondList.appendChild(anotherListItem);
+      };
+      addToTheSecond();
+      /* ESERCIZIO 6
+         Scrivi una funzione che aggiunga un paragrafo al primo div
+      */
+
+      const addParagraph = function () {
+        const firstDiv = document.querySelector("div");
+        const paragraphAdded = document.createElement("p");
+        paragraphAdded.innerText =
+          "Paragrafo aggiunto con la funzione addParagraph";
+        firstDiv.appendChild(paragraphAdded);
+      };
+      addParagraph();
+      /* ESERCIZIO 7
+         Scrivi una funzione che faccia scomparire la prima lista non ordinata
+      */
+
+      const hideFirstUl = function () {
+        const firstList = document.getElementById("firstList");
+        firstList.style.opacity = 0;
+      };
+      hideFirstUl();
+
+      /* ESERCIZIO 8
+         Scrivi una funzione che renda verde il background di ogni lista non ordinata
+        */
+
+      const paintItGreen = function () {
+        const allList = document.querySelectorAll("ul");
+        for (let i = 0; i < allList.length; i++) {
+          allList[i].style.backgroundColor = "green";
+        }
+      };
+      paintItGreen();
+
+      /* ESERCIZIO 9
+         Scrivi una funzione che rimuova l'ultima lettera dall'h1 ogni volta che l'utente lo clicca
+        */
+
+      const makeItClickable = function () {
+        document.getElementsByTagName("h1")[0].onclick = function () {
+          let title = document.getElementsByTagName("h1")[0].innerText;
+          let arrayOfLetter = title.split("");
+          console.log(arrayOfLetter);
+          arrayOfLetter.pop();
+          let newarrayOfLetter = arrayOfLetter;
+          newarrayOfLetter.join(" ");
+
+          console.log(newarrayOfLetter);
+          document.getElementsByTagName("h1")[0].innerText = newarrayOfLetter;
+        };
+      };
+      makeItClickable();
+      /* ESERCIZIO 10
+         Crea una funzione che, al click sul footer, riveli l'URL del link interno come contenuto di un alert()
+        */
+
+      const revealFooterLink = function () {
+        document.getElementsByTagName("footer")[0].onclick = function () {
+          const link = document.querySelector("footer a");
+          alert(link.href);
+        };
+      };
+      revealFooterLink();
+
+      /* ESERCIZIO 11
+         Crea una funzione che crei una tabella nell'elemento con id "tableArea".
+         La tabella avrà 5 elementi e questa struttura: immagine, nome prodotto, quantità, prezzo
+      */
+
+      const generateTable = function () {
+        const tablespace = document.getElementById("tableArea");
+        const table = document.createElement("table");
+        for (let i = 0; i < 5; i++) {
+          const tr = document.createElement("tr");
+          tr.innerHTML =
+            "<td><img src='https://picsum.photos/200/200' alt='random photo'></td><td>Immagine</td><td>1</td><td>GRATIS</td>";
+          table.appendChild(tr);
+        }
+        tablespace.appendChild(table);
+      };
+      generateTable();
+
+      /* ESERCIZIO 12
+         Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
+      */
+
+      const addRow = function (img, name, quantity, price) {
+        const table = document.getElementsByTagName("table")[0];
+
+        const newtr = document.createElement("tr");
+        newtr.innerHTML =
+          "<td><img src='" +
+          img +
+          "' alt='random photo'></td><td>+" +
+          name +
+          "+</td><td>" +
+          quantity +
+          "</td><td>" +
+          price +
+          "</td>";
+        table.appendChild(newtr);
+      };
+
+      addRow("https://picsum.photos/200/200", "immagine", "1", "gratis");
+
+      /* ESERCIZIO 14
+        Crea una funzione che nasconda le immagini della tabella quando eseguita
+      */
+
+      const hideAllImages = function () {
+        const images = document.querySelectorAll("table img");
+        for (let i = 0; i < images.length; i++) {
+          images[i].style.opacity = 0;
+        }
+      };
+      hideAllImages();
+
+      /* EXTRA ESERCIZIO 15
+        Crea una funzione che cambi il colore del h2 con id "changeMyColor" con un colore random ad ogni click ricevuto
+      */
+
+      const changeColorWithRandom = function () {
+        const h2 = document.getElementById("changeMyColor");
+        h2.onclick = function () {
+          const r = Math.floor(Math.random() * 256);
+          const g = Math.floor(Math.random() * 256);
+          const b = Math.floor(Math.random() * 256);
+          h2.style.color = "rgb(" + r + ", " + g + ", " + b + ")";
+        };
+      };
+      changeColorWithRandom();
+    </script>
+  </body>
+</html>
